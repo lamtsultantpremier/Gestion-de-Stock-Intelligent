@@ -50,7 +50,8 @@ class User(Base):
     id : Mapped[int] = mapped_column(primary_key = True , autoincrement = True , init = False)
     nom : Mapped[str] = mapped_column(String(255))
     prenom : Mapped[str] = mapped_column(String(255))
-    
+    phone_number : Mapped[str] = mapped_column(String(10))
+
     mouvements : Mapped[List[Mouvements]] = relationship(back_populates = "user" , default_factory = list)
 
 
