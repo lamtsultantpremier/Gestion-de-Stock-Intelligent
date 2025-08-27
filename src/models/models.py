@@ -10,14 +10,17 @@ class Produits(Base):
     __tablename__ = "produits"
 
     id : Mapped[int] = mapped_column(primary_key = True , autoincrement=True , init = False)
+
     name : Mapped[str] = mapped_column(String(255))
     prix : Mapped[float] = mapped_column(FLOAT)
+    categorie_id : Mapped[int] = mapped_column(ForeignKey("categorie.id") , nullable = True)
 
-    categorie : Mapped["Categories"] = relationship(back_populates = "produits")
-
-    mouvement : Mapped["Mouvements"] = relationship(back_populates = "produits")
     
-    categorie_id : Mapped[int] = mapped_column(ForeignKey("categorie.id") , nullable = True , default = None)
+    categorie : Mapped["Categories"] = relationship(back_populates = "produits", default = None)
+
+    mouvement : Mapped["Mouvements"] = relationship(back_populates = "produits" , init = False , default = None)
+    
+    
 class Categories(Base):
     
     __tablename__ = "categorie"
